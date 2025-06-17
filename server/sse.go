@@ -347,7 +347,8 @@ func (s *SSEServer) handleSSE(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sessionID := uuid.New().String()
+	//sessionID := uuid.New().String()
+	sessionID := "medgo-mcp"
 	session := &sseSession{
 		done:                make(chan struct{}),
 		eventQueue:          make(chan string, 100), // Buffer for events
