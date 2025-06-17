@@ -477,8 +477,18 @@ func (s *SSEServer) handleMessage(w http.ResponseWriter, r *http.Request) {
 	}
 	sessionI, ok := s.sessions.Load(sessionID)
 	if !ok {
-		s.writeJSONRPCError(w, nil, mcp.INVALID_PARAMS, "Invalid session ID")
-		return
+		session := &sseSession{
+			done:                make(chan struct{}),
+			eventQueue:          make(chan string, 100), // Buffer for events
+			sessionID:           sessionID,
+			notificationChannel: make(chan mcp.JSONRPCNotification, 100),
+		}
+
+		s.sessions.Store(sessionID, session)
+
+		sessionI = session
+		//s.writeJSONRPCError(w, nil, mcp.INVALID_PARAMS, "Invalid session ID")
+		//return
 	}
 	session := sessionI.(*sseSession)
 
