@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mark3labs/mcp-go/client/transport"
+	"github.com/Lester-Tai/mcp-go/client/transport"
 
-	"github.com/mark3labs/mcp-go/mcp"
-	"github.com/mark3labs/mcp-go/server"
+	"github.com/Lester-Tai/mcp-go/mcp"
+	"github.com/Lester-Tai/mcp-go/server"
 )
 
 type contextKey string
